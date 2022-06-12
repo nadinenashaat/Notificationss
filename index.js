@@ -42,5 +42,6 @@ app.post('/api/order', async function order(req, res) {
   await sgmail.send(message);
   return res.json(message);
 });
+app.get('/',(req,res)=> {res.send('succces')})
 
 app.listen(3000);
