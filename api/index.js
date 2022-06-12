@@ -3,9 +3,13 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser')
 const app = express();
+const cors=require ('cors');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors({ 
+  origin:"*"
+}))
 
 sgmail.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -39,7 +43,14 @@ app.post('/api/order', async function order(req, res) {
     subject: 'order update',
     text: " your order is created",
   };
-  await sgmail.send(message);
+  await sgmail.send(message,(error, response) => {
+    if(error) {
+        console.log(error);
+    }
+    else{
+        console.log(response);
+    }
+ });
   return res.json(message);
 });
 app.get('/',(req,res)=> {res.send('succces')})
