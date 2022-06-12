@@ -8,7 +8,7 @@ const cors=require ('cors');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors({ 
-  origin:"*"
+  origin:"http://localhost:3000"
 }))
 
 sgmail.setApiKey(process.env.SENDGRID_API_KEY);
